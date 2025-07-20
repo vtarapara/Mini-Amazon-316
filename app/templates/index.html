@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div class="text-center mt-5">
+  <form class="form-inline" action="{{ url_for('products.get_products') }}" method="post">
+    <label class="mr-2" for="keywords">Search for Products:</label>
+    <input type="text" class="form-control mr-2" name="keywords" id="keywords" required style="width: 50%;">
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+</div>
+<br><br>
+
+<h2 class="text-center">Recommended Products</h2>
+<table class='table table-hover table-bordered container'>
+  <thead class="thead-dark">
+    <tr>
+      <th scope="col">Product ID</th>
+      <th scope="col">Product Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Description</th>
+      <th scope="col">Category</th>
+      <th scope="col">Image</th>
+      <th scope="col">Availability</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in avail_products %}
+      <tr onclick="window.location='{{ url_for('products.product_details', pid=product.id) }}';" style="cursor:pointer;">
+        <th scope="row">{{product.id}}</th>
+        <td>{{product.name}}</td>
+        <td>{{product.price}}</td>
+        <td>{{product.description}}</td>
+        <td>{{product.category}}</td>
+        <td>
+          <img src="{{ product.image_url }}" alt="{{ product.name }} Image" width="100" height="100">
+        </td>
+        <td>
+          <span class="{% if product.available %}text-success{% else %}text-danger{% endif %}">
+            {% if product.available %}
+              In Stock
+            {% else %}
+              Out of Stock
+            {% endif %}
+          </span>
+        </td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<br><br>
+
+
+
+{% endblock %}

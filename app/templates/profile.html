@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+<style>
+.card-header-with-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+</style>
+<div class="container mt-5">
+
+    <div class="card">
+        <div class="card-header card-header-with-button">
+            <span>Profile Information</span>
+            <a href="{{ url_for('users.manage_profile') }}" class="btn btn-primary">Manage Profile</a>
+        </div>
+        <div class="card-body">
+            <p class="card-text"><strong>User ID:</strong> {{ user.id }}</p>
+            <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+            <p class="card-text"><strong>First Name:</strong> {{ user.firstname }}</p>
+            <p class="card-text"><strong>Last Name:</strong> {{ user.lastname }}</p>
+            <p class="card-text"><strong>Address:</strong> {{ user.address or "Not provided" }}</p>
+            <p class="card-text"><strong>Account Balance:</strong> ${{ "%.2f"|format(user.balance) }}</p>
+        </div>
+        <div class="card-footer">
+            <a href="{{ url_for('users.user_spending', uid=user.id) }}" class="btn btn-light" style="width: 100%; margin-bottom: 5px;">Balance History</a>
+            <a href="{{ url_for('product_rating.product_rating', uid=user.id, page=1) }}" class="btn btn-light" style="width: 100%; margin-bottom: 5px;">Product Reviews</a>
+            <a href="{{ url_for('seller_rating.seller_rating', uid=user.id, page=1) }}" class="btn btn-light" style="width: 100%;">Seller Reviews</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
