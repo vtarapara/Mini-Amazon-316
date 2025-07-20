@@ -1,5 +1,4 @@
-# TEAM NAME: SCHEMA SCHEMERS!
-
+# Team Name: Schema Schemers!
 # Skeleton Code for CompSci 316 Standard Course Project.
 
 Originally created by [Rickard
